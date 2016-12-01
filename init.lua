@@ -8,11 +8,7 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "m", function()
   local screen = win:screen()
   local max = screen:frame()
 
-  f.x = 0
-  f.y = 0
-  f.w = max.w
-  f.h = max.h
-  win:setFrame(f)
+  win:maximize()
 end)
 
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Left", function()
