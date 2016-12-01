@@ -85,6 +85,15 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "p", function()
   win:moveOneScreenWest()
 end)
 
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "f", function()
+  local win = hs.window.focusedWindow()
+  local f = win:frame()
+  local screen = win:screen()
+  local max = screen:frame()
+
+  win:toggleFullscreen()
+end)
+
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "1", function()
   local win = hs.window.focusedWindow()
   local f = win:frame()
