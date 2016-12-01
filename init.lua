@@ -67,6 +67,24 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Down", function()
   win:setFrame(f)
 end)
 
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "n", function()
+  local win = hs.window.focusedWindow()
+  local f = win:frame()
+  local screen = win:screen()
+  local max = screen:frame()
+
+  win:moveOneScreenEast()
+end)
+
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "p", function()
+  local win = hs.window.focusedWindow()
+  local f = win:frame()
+  local screen = win:screen()
+  local max = screen:frame()
+
+  win:moveOneScreenWest()
+end)
+
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "1", function()
   local win = hs.window.focusedWindow()
   local f = win:frame()
