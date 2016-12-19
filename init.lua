@@ -17,8 +17,8 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Left", function()
   local screen = win:screen()
   local max = screen:frame()
 
-  f.x = 0
-  f.y = 0
+  f.x = max.x
+  f.y = max.y
   f.w = max.w / 2
   f.h = max.h
   win:setFrame(f)
@@ -43,8 +43,8 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Up", function()
   local screen = win:screen()
   local max = screen:frame()
 
-  f.x = 0
-  f.y = 0
+  f.x = max.x
+  f.y = max.y
   f.w = max.w
   f.h = max.h / 2
   win:setFrame(f)
@@ -56,7 +56,7 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Down", function()
   local screen = win:screen()
   local max = screen:frame()
 
-  f.x = 0
+  f.x = max.x
   f.y = max.y + (max.h / 2) 
   f.w = max.w
   f.h = max.h / 2
@@ -96,8 +96,8 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "1", function()
   local screen = win:screen()
   local max = screen:frame()
 
-  f.x = 0
-  f.y = 0
+  f.x = max.x
+  f.y = max.y
   f.w = max.w / 2
   f.h = max.h / 2
   win:setFrame(f)
@@ -122,7 +122,7 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "3", function()
   local screen = win:screen()
   local max = screen:frame()
 
-  f.x = 0
+  f.x = max.x
   f.y = max.y + (max.h / 2)
   f.w = max.w / 2
   f.h = max.h / 2
@@ -148,8 +148,8 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "5", function()
   local screen = win:screen()
   local max = screen:frame()
 
-  f.x = 0
-  f.y = 0
+  f.x = max.x
+  f.y = max.y
   f.w = max.w / 3
   f.h = max.h
   win:setFrame(f)
@@ -161,8 +161,8 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "6", function()
   local screen = win:screen()
   local max = screen:frame()
 
-  f.x = max.w / 3
-  f.y = 0
+  f.x = max.x + max.w / 3
+  f.y = max.y
   f.w = max.w / 3
   f.h = max.h
   win:setFrame(f)
@@ -175,7 +175,7 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "7", function()
   local max = screen:frame()
 
   f.x = max.x + (max.w - (max.w / 3))
-  f.y = 0
+  f.y = max.y
   f.w = max.w / 3
   f.h = max.h
   win:setFrame(f)
@@ -187,8 +187,8 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "8", function()
   local screen = win:screen()
   local max = screen:frame()
 
-  f.x = 0
-  f.y = 0
+  f.x = max.x
+  f.y = max.y
   f.w = (max.w / 3) * 2
   f.h = max.h
   win:setFrame(f)
@@ -200,8 +200,8 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "9", function()
   local screen = win:screen()
   local max = screen:frame()
 
-  f.x = max.w / 3
-  f.y = 0
+  f.x = max.x + max.w / 3
+  f.y = max.y
   f.w = (max.w / 3) * 2
   f.h = max.h
   win:setFrame(f)
@@ -213,8 +213,8 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "pad7", function()
   local screen = win:screen()
   local max = screen:frame()
 
-  f.x = 0
-  f.y = 0
+  f.x = max.x
+  f.y = max.y
   f.w = max.w / 3
   f.h = max.h / 3
   win:setFrame(f)
@@ -226,8 +226,8 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "pad8", function()
   local screen = win:screen()
   local max = screen:frame()
 
-  f.x = max.w / 3
-  f.y = 0
+  f.x = max.x + max.w / 3
+  f.y = max.y
   f.w = max.w / 3
   f.h = max.h / 3
   win:setFrame(f)
@@ -240,7 +240,7 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "pad9", function()
   local max = screen:frame()
 
   f.x = max.x + (max.w - (max.w / 3))
-  f.y = 0
+  f.y = max.y
   f.w = max.w / 3
   f.h = max.h / 3
   win:setFrame(f)
@@ -252,7 +252,7 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "pad4", function()
   local screen = win:screen()
   local max = screen:frame()
 
-  f.x = 0
+  f.x = max.x
   f.y = max.y + (max.h - ((max.h / 3) * 2))
   f.w = max.w / 3
   f.h = max.h / 3
@@ -265,7 +265,7 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "pad5", function()
   local screen = win:screen()
   local max = screen:frame()
 
-  f.x = max.w / 3
+  f.x = max.x + max.w / 3
   f.y = max.y + (max.h - ((max.h / 3) * 2))
   f.w = max.w / 3
   f.h = max.h / 3
@@ -291,7 +291,7 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "pad1", function()
   local screen = win:screen()
   local max = screen:frame()
 
-  f.x = 0
+  f.x = max.x
   f.y = max.y + (max.h - (max.h / 3))
   f.w = max.w / 3
   f.h = max.h / 3
@@ -304,7 +304,7 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "pad2", function()
   local screen = win:screen()
   local max = screen:frame()
 
-  f.x = max.w / 3
+  f.x = max.x + max.w / 3
   f.y = max.y + (max.h - (max.h / 3))
   f.w = max.w / 3
   f.h = max.h / 3
