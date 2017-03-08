@@ -31,6 +31,18 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "c", function()
   oldwin:focus()
 end)
 
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "s", function()
+  oldwin = hs.window.focusedWindow()
+  hs.window.animationDuration = 0
+  hs.application.open("Spotify", 15, true)
+  win = hs.window.focusedWindow()
+  win:moveOneScreenEast()
+  win:moveOneScreenEast()
+  win:maximize()
+  win:toggleFullscreen()
+  oldwin:focus()
+end)
+
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Left", function()
   init()
   winFrame.x = screenFrame.x
