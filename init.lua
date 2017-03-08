@@ -15,6 +15,22 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "m", function()
   win:maximize()
 end)
 
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "c", function()
+  oldwin = hs.window.focusedWindow()
+  hs.window.animationDuration = 0
+  hs.application.launchOrFocus("Google Chrome")
+  hs.eventtap.keyStroke("cmd", "n")
+  win = hs.window.focusedWindow()
+  win:moveOneScreenEast()
+  win:moveOneScreenEast()
+  win:maximize()
+  hs.eventtap.keyStroke("cmd", "l")
+  hs.eventtap.keyStrokes("https://andycgm.azurewebsites.net/")
+  hs.eventtap.keyStroke("", "return")
+  win:toggleFullscreen()
+  oldwin:focus()
+end)
+
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Left", function()
   init()
   winFrame.x = screenFrame.x
