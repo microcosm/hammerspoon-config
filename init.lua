@@ -18,7 +18,7 @@ end)
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "c", function()
   oldwin = hs.window.focusedWindow()
   hs.window.animationDuration = 0
-  hs.application.launchOrFocus("Google Chrome")
+  hs.application.open("Google Chrome", 15, true)
   hs.eventtap.keyStroke("cmd", "n")
   win = hs.window.focusedWindow()
   win:moveOneScreenEast()
