@@ -15,31 +15,41 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "m", function()
   win:maximize()
 end)
 
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "c", function()
-  oldwin = hs.window.focusedWindow()
-  hs.window.animationDuration = 0
-  hs.application.open("Safari", 30, true)
-  win = hs.window.focusedWindow()
+doWhenLaunched = function(app, fn)
+  hs.timer.waitUntil(
+    function()
+      return app:allWindows()[1] ~= nil
+    end,
+    function()
+	  fn(app:allWindows()[1])
+    end,
+    0.1 -- check every 1/10 of a second
+  )
+end
+
+fullscreenOnMac = function(win)
   win:moveOneScreenEast()
   win:moveOneScreenEast()
   win:maximize()
-  hs.eventtap.keyStroke("cmd", "l")
-  hs.eventtap.keyStrokes("https://andycgm.azurewebsites.net/")
-  hs.eventtap.keyStroke("", "return")
   win:toggleFullscreen()
-  oldwin:focus()
+end
+
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "c", function()
+  hs.window.animationDuration = 0
+  app = hs.application.open("Safari", 30, true)
+
+  doWhenLaunched(app, function(win)
+    fullscreenOnMac(win)
+  end)
 end)
 
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "s", function()
-  oldwin = hs.window.focusedWindow()
   hs.window.animationDuration = 0
-  hs.application.open("Spotify", 15, true)
-  win = hs.window.focusedWindow()
-  win:moveOneScreenEast()
-  win:moveOneScreenEast()
-  win:maximize()
-  win:toggleFullscreen()
-  oldwin:focus()
+  app = hs.application.open("Spotify", 30, true)
+
+  doWhenLaunched(app, function(win)
+    fullscreenOnMac(win)
+  end)
 end)
 
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Left", function()
