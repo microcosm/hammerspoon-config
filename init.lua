@@ -1,4 +1,4 @@
--- Focused window arrangements
+-- General positioning
 maximize = function(win)
   win:maximize()
 end
@@ -213,29 +213,63 @@ ninthBottomRight = function(win)
   win:setFrame(winFrame)
 end
 
+-- Screens
 fullscreenOnMac = function(win)
-  win:moveOneScreenEast()
-  win:moveOneScreenEast()
-  win:maximize()
-  win:toggleFullscreen()
+  moveToMacScreen(win)
+  maximize(win)
+  fullscreen(win)
 end
 
--- App specific arrangements
-cgmToMac = function()
+twoThirdsRightOnDell = function(win)
+  hs.eventtap.keyStroke({ "ctrl", "alt", "cmd" }, ".")
+  hs.eventtap.keyStroke({ "ctrl", "alt", "cmd" }, "9") -- Chrome didn't like it the other way
+end
+
+thirdLeftOnDell = function(win)
+  moveToDellScreen(win)
+  thirdLeft(win)
+end
+
+moveToSonyScreen = function(win)
+  win:moveToScreen("SONY TV")
+end
+
+moveToDellScreen = function(win)
+  win:moveToScreen("DELL U3415W")
+end
+
+moveToMacScreen = function(win)
+  win:moveToScreen("Color LCD")
+end
+
+-- Apps
+launchCgm = function()
   launchThenDo("Safari", function(win)
     fullscreenOnMac(win)
   end)
 end
 
-spotifyToMac = function()
+launchSpotify = function()
   launchThenDo("Spotify", function(win)
     fullscreenOnMac(win)
   end)
 end
 
+launchChrome = function()
+  launchThenDo("Google Chrome", function(win)
+    twoThirdsRightOnDell(win)
+  end)
+end
+
+launchITerm = function()
+  launchThenDo("iTerm", function(win)
+    thirdLeftOnDell(win)
+  end)
+end
+
 -- Helpers
 workFrom = function(win)
-  hs.window.animationDuration = 0.025
+  hs.window.animationDuration = 0
   winFrame = win:frame()
   screen = win:screen()
   screenFrame = screen:frame()
@@ -255,7 +289,7 @@ launchThenDo = function(appname, fn)
   )
 end
 
-------- Hotkey bindings -------
+-- Hotkey bindings
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "r", hs.reload)
 
 -- Focused window hotkeys
@@ -289,9 +323,15 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "pad1", function() ninthBottomLeft(hs.win
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "pad2", function() ninthBottomMiddle(hs.window.focusedWindow()) end)
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "pad3", function() ninthBottomRight(hs.window.focusedWindow()) end)
 
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, ",", function() moveToSonyScreen(hs.window.focusedWindow()) end)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, ".", function() moveToDellScreen(hs.window.focusedWindow()) end)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "/", function() moveToMacScreen(hs.window.focusedWindow()) end)
+
 -- App specific hotkeys
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "c", cgmToMac)
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "s", spotifyToMac)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "b", launchCgm)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "s", launchSpotify)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "c", launchChrome)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "i", launchITerm)
 
 -- Inform when reloaded
 hs.alert.show("Hammerspoon config reloaded")
