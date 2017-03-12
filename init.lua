@@ -1,26 +1,22 @@
 -- Focused window arrangements
-focusedWindowMaximize = function()
-  init()
+maximize = function(win)
   win:maximize()
 end
 
-focusedWindowFullScreen = function()
-  init()
+fullScreen = function(win)
   win:toggleFullscreen()
 end
 
-focusedWindowNextScreen = function()
-  init()
+nextScreen = function(win)
   win:moveOneScreenEast()
 end
 
-focusedWindowPreviousScreen = function()
-  init()
+previousScreen = function(win)
   win:moveOneScreenWest()
 end
 
-focusedWindowLeft = function()
-  init()
+left = function(win)
+  workFrom(win)
   winFrame.x = screenFrame.x
   winFrame.y = screenFrame.y
   winFrame.w = screenFrame.w / 2
@@ -28,8 +24,8 @@ focusedWindowLeft = function()
   win:setFrame(winFrame)
 end
 
-focusedWindowRight = function()
-  init()
+right = function(win)
+  workFrom(win)
   winFrame.x = screenFrame.x + (screenFrame.w / 2)
   winFrame.y = screenFrame.y
   winFrame.w = screenFrame.w / 2
@@ -37,8 +33,8 @@ focusedWindowRight = function()
   win:setFrame(winFrame)
 end
 
-focusedWindowUp = function()
-  init()
+up = function(win)
+  workFrom(win)
   winFrame.x = screenFrame.x
   winFrame.y = screenFrame.y
   winFrame.w = screenFrame.w
@@ -46,8 +42,8 @@ focusedWindowUp = function()
   win:setFrame(winFrame)
 end
 
-focusedWindowDown = function()
-  init()
+down = function(win)
+  workFrom(win)
   winFrame.x = screenFrame.x
   winFrame.y = screenFrame.y + (screenFrame.h / 2) 
   winFrame.w = screenFrame.w
@@ -55,8 +51,8 @@ focusedWindowDown = function()
   win:setFrame(winFrame)
 end
 
-focusedWindowTopLeft = function()
-  init()
+topLeft = function(win)
+  workFrom(win)
   winFrame.x = screenFrame.x
   winFrame.y = screenFrame.y
   winFrame.w = screenFrame.w / 2
@@ -64,8 +60,8 @@ focusedWindowTopLeft = function()
   win:setFrame(winFrame)
 end
 
-focusedWindowTopRight = function()
-  init()
+topRight = function(win)
+  workFrom(win)
   winFrame.x = screenFrame.x + (screenFrame.w / 2)
   winFrame.y = screenFrame.y
   winFrame.w = screenFrame.w / 2
@@ -73,8 +69,8 @@ focusedWindowTopRight = function()
   win:setFrame(winFrame)
 end
 
-focusedWindowBottomLeft = function()
-  init()
+bottomLeft = function(win)
+  workFrom(win)
   winFrame.x = screenFrame.x
   winFrame.y = screenFrame.y + (screenFrame.h / 2)
   winFrame.w = screenFrame.w / 2
@@ -82,8 +78,8 @@ focusedWindowBottomLeft = function()
   win:setFrame(winFrame)
 end
 
-focusedWindowBottomRight = function()
-  init()
+bottomRight = function(win)
+  workFrom(win)
   winFrame.x = screenFrame.x + (screenFrame.w / 2)
   winFrame.y = screenFrame.y + (screenFrame.h / 2)
   winFrame.w = screenFrame.w / 2
@@ -91,8 +87,8 @@ focusedWindowBottomRight = function()
   win:setFrame(winFrame)
 end
 
-focusedWindowThirdLeft = function()
-  init()
+thirdLeft = function(win)
+  workFrom(win)
   winFrame.x = screenFrame.x
   winFrame.y = screenFrame.y
   winFrame.w = screenFrame.w / 3
@@ -100,8 +96,8 @@ focusedWindowThirdLeft = function()
   win:setFrame(winFrame)
 end
 
-focusedWindowThirdMiddle = function()
-  init()
+thirdMiddle = function(win)
+  workFrom(win)
   winFrame.x = screenFrame.x + screenFrame.w / 3
   winFrame.y = screenFrame.y
   winFrame.w = screenFrame.w / 3
@@ -109,8 +105,8 @@ focusedWindowThirdMiddle = function()
   win:setFrame(winFrame)
 end
 
-focusedWindowThirdRight = function()
-  init()
+thirdRight = function(win)
+  workFrom(win)
   winFrame.x = screenFrame.x + (screenFrame.w - (screenFrame.w / 3))
   winFrame.y = screenFrame.y
   winFrame.w = screenFrame.w / 3
@@ -118,8 +114,8 @@ focusedWindowThirdRight = function()
   win:setFrame(winFrame)
 end
 
-focusedWindowTwoThirdsLeft = function()
-  init()
+twoThirdsLeft = function(win)
+  workFrom(win)
   winFrame.x = screenFrame.x
   winFrame.y = screenFrame.y
   winFrame.w = (screenFrame.w / 3) * 2
@@ -127,8 +123,8 @@ focusedWindowTwoThirdsLeft = function()
   win:setFrame(winFrame)
 end
 
-focusedWindowTwoThirdsRight = function()
-  init()
+twoThirdsRight = function(win)
+  workFrom(win)
   winFrame.x = screenFrame.x + screenFrame.w / 3
   winFrame.y = screenFrame.y
   winFrame.w = (screenFrame.w / 3) * 2
@@ -136,8 +132,8 @@ focusedWindowTwoThirdsRight = function()
   win:setFrame(winFrame)
 end
 
-focusedWindowNinthsTopLeft = function()
-  init()
+ninthTopLeft = function(win)
+  workFrom(win)
   winFrame.x = screenFrame.x
   winFrame.y = screenFrame.y
   winFrame.w = screenFrame.w / 3
@@ -145,8 +141,8 @@ focusedWindowNinthsTopLeft = function()
   win:setFrame(winFrame)
 end
 
-focusedWindowNinthsTopMiddle = function()
-  init()
+ninthTopMiddle = function(win)
+  workFrom(win)
   winFrame.x = screenFrame.x + screenFrame.w / 3
   winFrame.y = screenFrame.y
   winFrame.w = screenFrame.w / 3
@@ -154,8 +150,8 @@ focusedWindowNinthsTopMiddle = function()
   win:setFrame(winFrame)
 end
 
-focusedWindowNinthsTopRight = function()
-  init()
+ninthTopRight = function(win)
+  workFrom(win)
   winFrame.x = screenFrame.x + (screenFrame.w - (screenFrame.w / 3))
   winFrame.y = screenFrame.y
   winFrame.w = screenFrame.w / 3
@@ -163,8 +159,8 @@ focusedWindowNinthsTopRight = function()
   win:setFrame(winFrame)
 end
 
-focusedWindowNinthsCenterLeft = function()
-  init()
+ninthCenterLeft = function(win)
+  workFrom(win)
   winFrame.x = screenFrame.x
   winFrame.y = screenFrame.y + (screenFrame.h - ((screenFrame.h / 3) * 2))
   winFrame.w = screenFrame.w / 3
@@ -172,8 +168,8 @@ focusedWindowNinthsCenterLeft = function()
   win:setFrame(winFrame)
 end
 
-focusedWindowNinthsCenterMiddle = function()
-  init()
+ninthCenterMiddle = function(win)
+  workFrom(win)
   winFrame.x = screenFrame.x + screenFrame.w / 3
   winFrame.y = screenFrame.y + (screenFrame.h - ((screenFrame.h / 3) * 2))
   winFrame.w = screenFrame.w / 3
@@ -181,8 +177,8 @@ focusedWindowNinthsCenterMiddle = function()
   win:setFrame(winFrame)
 end
 
-focusedWindowNinthsCenterRight = function()
-  init()
+ninthCenterRight = function(win)
+  workFrom(win)
   winFrame.x = screenFrame.x + (screenFrame.w - (screenFrame.w / 3))
   winFrame.y = screenFrame.y + (screenFrame.h - ((screenFrame.h / 3) * 2))
   winFrame.w = screenFrame.w / 3
@@ -190,8 +186,8 @@ focusedWindowNinthsCenterRight = function()
   win:setFrame(winFrame)
 end
 
-focusedWindowNinthsBottomLeft = function()
-  init()
+ninthBottomLeft = function(win)
+  workFrom(win)
   winFrame.x = screenFrame.x
   winFrame.y = screenFrame.y + (screenFrame.h - (screenFrame.h / 3))
   winFrame.w = screenFrame.w / 3
@@ -199,8 +195,8 @@ focusedWindowNinthsBottomLeft = function()
   win:setFrame(winFrame)
 end
 
-focusedWindowNinthsBottomMiddle = function()
-  init()
+ninthBottomMiddle = function(win)
+  workFrom(win)
   winFrame.x = screenFrame.x + screenFrame.w / 3
   winFrame.y = screenFrame.y + (screenFrame.h - (screenFrame.h / 3))
   winFrame.w = screenFrame.w / 3
@@ -208,13 +204,20 @@ focusedWindowNinthsBottomMiddle = function()
   win:setFrame(winFrame)
 end
 
-focusedWindowNinthsBottomRight = function()
-  init()
+ninthBottomRight = function(win)
+  workFrom(win)
   winFrame.x = screenFrame.x + (screenFrame.w - (screenFrame.w / 3))
   winFrame.y = screenFrame.y + (screenFrame.h - (screenFrame.h / 3))
   winFrame.w = screenFrame.w / 3
   winFrame.h = screenFrame.h / 3
   win:setFrame(winFrame)
+end
+
+fullscreenOnMac = function(win)
+  win:moveOneScreenEast()
+  win:moveOneScreenEast()
+  win:maximize()
+  win:toggleFullscreen()
 end
 
 -- App specific arrangements
@@ -231,9 +234,8 @@ spotifyToMac = function()
 end
 
 -- Helpers
-init = function()
+workFrom = function(win)
   hs.window.animationDuration = 0.025
-  win = hs.window.focusedWindow()
   winFrame = win:frame()
   screen = win:screen()
   screenFrame = screen:frame()
@@ -253,46 +255,39 @@ launchThenDo = function(appname, fn)
   )
 end
 
-fullscreenOnMac = function(win)
-  win:moveOneScreenEast()
-  win:moveOneScreenEast()
-  win:maximize()
-  win:toggleFullscreen()
-end
-
 ------- Hotkey bindings -------
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "r", hs.reload)
 
 -- Focused window hotkeys
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "m", focusedWindowMaximize)
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "f", focusedWindowFullScreen)
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "n", focusedWindowNextScreen)
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "p", focusedWindowPreviousScreen)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "m", function() maximize(hs.window.focusedWindow()) end)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "f", function() fullScreen(hs.window.focusedWindow()) end)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "n", function() nextScreen(hs.window.focusedWindow()) end)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "p", function() previousScreen(hs.window.focusedWindow()) end)
 
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Left", focusedWindowLeft)
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Right", focusedWindowRight)
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Up", focusedWindowUp)
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Down", focusedWindowDown)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Left", function() left(hs.window.focusedWindow()) end)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Right", function() right(hs.window.focusedWindow()) end)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Up", function() up(hs.window.focusedWindow()) end)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Down", function() down(hs.window.focusedWindow()) end)
 
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "1", focusedWindowTopLeft)
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "2", focusedWindowTopRight)
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "3", focusedWindowBottomLeft)
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "4", focusedWindowBottomRight)
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "5", focusedWindowThirdLeft)
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "6", focusedWindowThirdMiddle)
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "7", focusedWindowThirdRight)
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "8", focusedWindowTwoThirdsLeft)
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "9", focusedWindowTwoThirdsRight)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "1", function() topLeft(hs.window.focusedWindow()) end)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "2", function() topRight(hs.window.focusedWindow()) end)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "3", function() bottomLeft(hs.window.focusedWindow()) end)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "4", function() bottomRight(hs.window.focusedWindow()) end)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "5", function() thirdLeft(hs.window.focusedWindow()) end)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "6", function() thirdMiddle(hs.window.focusedWindow()) end)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "7", function() thirdRight(hs.window.focusedWindow()) end)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "8", function() twoThirdsLeft(hs.window.focusedWindow()) end)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "9", function() twoThirdsRight(hs.window.focusedWindow()) end)
 
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "pad7", focusedWindowNinthsTopLeft)
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "pad8", focusedWindowNinthsTopMiddle)
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "pad9", focusedWindowNinthsTopRight)
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "pad4", focusedWindowNinthsCenterLeft)
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "pad5", focusedWindowNinthsCenterMiddle)
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "pad6", focusedWindowNinthsCenterRight)
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "pad1", focusedWindowNinthsBottomLeft)
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "pad2", focusedWindowNinthsBottomMiddle)
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "pad3", focusedWindowNinthsBottomRight)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "pad7", function() ninthTopLeft(hs.window.focusedWindow()) end)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "pad8", function() ninthTopMiddle(hs.window.focusedWindow()) end)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "pad9", function() ninthTopRight(hs.window.focusedWindow()) end)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "pad4", function() ninthCenterLeft(hs.window.focusedWindow()) end)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "pad5", function() ninthCenterMiddle(hs.window.focusedWindow()) end)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "pad6", function() ninthCenterRight(hs.window.focusedWindow()) end)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "pad1", function() ninthBottomLeft(hs.window.focusedWindow()) end)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "pad2", function() ninthBottomMiddle(hs.window.focusedWindow()) end)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "pad3", function() ninthBottomRight(hs.window.focusedWindow()) end)
 
 -- App specific hotkeys
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "c", cgmToMac)
