@@ -219,19 +219,13 @@ end
 
 -- App specific arrangements
 cgmToMac = function()
-  hs.window.animationDuration = 0
-  app = hs.application.open("Safari", 30, true)
-
-  doWhenLaunched(app, function(win)
+  launchThenDo("Safari", function(win)
     fullscreenOnMac(win)
   end)
 end
 
 spotifyToMac = function()
-  hs.window.animationDuration = 0
-  app = hs.application.open("Spotify", 30, true)
-
-  doWhenLaunched(app, function(win)
+  launchThenDo("Spotify", function(win)
     fullscreenOnMac(win)
   end)
 end
@@ -245,7 +239,9 @@ init = function()
   screenFrame = screen:frame()
 end
 
-doWhenLaunched = function(app, fn)
+launchThenDo = function(appname, fn)
+  app = hs.application.open(appname, 30, true)
+
   hs.timer.waitUntil(
     function()
       return app:allWindows()[1] ~= nil
