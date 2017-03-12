@@ -3,7 +3,7 @@ maximize = function(win)
   win:maximize()
 end
 
-fullScreen = function(win)
+fullscreen = function(win)
   win:toggleFullscreen()
 end
 
@@ -273,6 +273,28 @@ launchITerm = function()
   end)
 end
 
+launchAll = function()
+  hs.timer.doAfter(0, function()
+    launchCgm()
+  end)
+
+  hs.timer.doAfter(2, function()
+    launchSpotify()
+  end)
+
+  hs.timer.doAfter(4, function()
+    launchSublime()
+  end)
+
+  hs.timer.doAfter(6, function()
+    launchChrome()
+  end)
+
+  hs.timer.doAfter(8, function()
+    launchITerm()
+  end)
+end
+
 -- Helpers
 workFrom = function(win)
   hs.window.animationDuration = 0
@@ -300,7 +322,7 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "r", hs.reload)
 
 -- Focused window hotkeys
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "m", function() maximize(hs.window.focusedWindow()) end)
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "f", function() fullScreen(hs.window.focusedWindow()) end)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "f", function() fullscreen(hs.window.focusedWindow()) end)
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "n", function() nextScreen(hs.window.focusedWindow()) end)
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "p", function() previousScreen(hs.window.focusedWindow()) end)
 
@@ -339,6 +361,7 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "s", launchSpotify)
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "u", launchSublime)
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "c", launchChrome)
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "i", launchITerm)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "a", launchAll)
 
 -- Inform when reloaded
 hs.alert.show("Hammerspoon config reloaded")
