@@ -255,6 +255,12 @@ launchSpotify = function()
   end)
 end
 
+launchSublime = function()
+  launchThenDo("Sublime Text", function(win)
+    twoThirdsRightOnDell(win)
+  end)
+end
+
 launchChrome = function()
   launchThenDo("Google Chrome", function(win)
     twoThirdsRightOnDell(win)
@@ -330,6 +336,7 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "/", function() moveToMacScreen(hs.window
 -- App specific hotkeys
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "b", launchCgm)
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "s", launchSpotify)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "u", launchSublime)
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "c", launchChrome)
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "i", launchITerm)
 
