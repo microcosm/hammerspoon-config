@@ -225,6 +225,11 @@ twoThirdsRightOnDell = function(win)
   hs.eventtap.keyStroke({ "ctrl", "alt", "cmd" }, "9") -- Chrome didn't like it the other way
 end
 
+rightOnDell = function(win)
+  moveToDellScreen(win)
+  right(win)
+end
+
 thirdLeftOnDell = function(win)
   moveToDellScreen(win)
   thirdLeft(win)
@@ -252,6 +257,12 @@ end
 launchChrome = function()
   launchThenDo("Google Chrome", function(win)
     twoThirdsRightOnDell(win)
+  end)
+end
+
+launchFinder = function()
+  launchThenDo("Finder", function(win)
+    rightOnDell(win)
   end)
 end
 
@@ -283,14 +294,18 @@ launchAll = function()
   end)
 
   hs.timer.doAfter(4, function()
-    launchSublime()
+    launchFinder()
   end)
 
   hs.timer.doAfter(6, function()
-    launchITerm()
+    launchSublime()
   end)
 
   hs.timer.doAfter(8, function()
+    launchITerm()
+  end)
+
+  hs.timer.doAfter(10, function()
     launchChrome()
   end)
 end
@@ -303,15 +318,18 @@ workFrom = function(win)
   screenFrame = screen:frame()
 end
 
-launchThenDo = function(appname, fn)
+launchThenDo = function(appname, action)
   app = hs.application.open(appname, 30, true)
+  doWhenOpen(app, action)
+end
 
+doWhenOpen = function(app, action)
   hs.timer.waitUntil(
     function()
       return app:allWindows()[1] ~= nil
     end,
     function()
-	  fn(app:allWindows()[1])
+      action(app:allWindows()[1])
     end,
     0.1
   )
@@ -360,6 +378,7 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "a", launchAll)
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "b", launchCgm)
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "c", launchChrome)
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "i", launchITerm)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "f", launchFinder)
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "s", launchSpotify)
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "u", launchSublime)
 
