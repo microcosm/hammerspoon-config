@@ -249,18 +249,6 @@ launchCgm = function()
   end)
 end
 
-launchSpotify = function()
-  launchThenDo("Spotify", function(win)
-    fullscreenOnMac(win)
-  end)
-end
-
-launchSublime = function()
-  launchThenDo("Sublime Text", function(win)
-    twoThirdsRightOnDell(win)
-  end)
-end
-
 launchChrome = function()
   launchThenDo("Google Chrome", function(win)
     twoThirdsRightOnDell(win)
@@ -270,6 +258,18 @@ end
 launchITerm = function()
   launchThenDo("iTerm", function(win)
     thirdLeftOnDell(win)
+  end)
+end
+
+launchSpotify = function()
+  launchThenDo("Spotify", function(win)
+    fullscreenOnMac(win)
+  end)
+end
+
+launchSublime = function()
+  launchThenDo("Sublime Text", function(win)
+    twoThirdsRightOnDell(win)
   end)
 end
 
@@ -287,11 +287,11 @@ launchAll = function()
   end)
 
   hs.timer.doAfter(6, function()
-    launchChrome()
+    launchITerm()
   end)
 
   hs.timer.doAfter(8, function()
-    launchITerm()
+    launchChrome()
   end)
 end
 
@@ -356,12 +356,12 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, ".", function() moveToDellScreen(hs.windo
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "/", function() moveToMacScreen(hs.window.focusedWindow()) end)
 
 -- App specific hotkeys
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "a", launchAll)
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "b", launchCgm)
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "s", launchSpotify)
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "u", launchSublime)
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "c", launchChrome)
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "i", launchITerm)
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "a", launchAll)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "s", launchSpotify)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "u", launchSublime)
 
 -- Inform when reloaded
 hs.alert.show("Hammerspoon config reloaded")
