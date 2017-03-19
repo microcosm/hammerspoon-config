@@ -342,23 +342,50 @@ end
 openMail = function()
   if hs.application.launchOrFocus(chrome) then
     hs.eventtap.keyStroke({ "cmd" }, "l")
-    hs.timer.doAfter(1.1, function()
+    hs.timer.doAfter(2.1, function()
       hs.eventtap.keyStrokes("bit.ly/2mWJpOS")
     end)
-    hs.timer.doAfter(1.2, function()
+    hs.timer.doAfter(2.2, function()
       hs.eventtap.keyStroke(nil, "return")
     end)
-    hs.timer.doAfter(1.3, function()
+    hs.timer.doAfter(2.3, function()
       hs.eventtap.keyStroke({ "cmd" }, "t")
     end)
-    hs.timer.doAfter(1.4, function()
+    hs.timer.doAfter(2.4, function()
       hs.eventtap.keyStrokes("bit.ly/2mgiujH")
     end)
-    hs.timer.doAfter(1.5, function()
+    hs.timer.doAfter(2.5, function()
       hs.eventtap.keyStroke(nil, "return")
     end)
-    hs.timer.doAfter(1.6, function()
+    hs.timer.doAfter(2.6, function()
       hs.eventtap.keyStroke({ "ctrl", "shift" }, "tab")
+    end)
+    hs.timer.doAfter(7, function()
+      hs.eventtap.keyStroke(nil, "f")
+    end)
+    hs.timer.doAfter(7.1, function()
+      hs.eventtap.keyStroke(nil, "a")
+    end)
+    hs.timer.doAfter(7.2, function()
+      hs.eventtap.keyStroke(nil, "return")
+    end)
+    hs.timer.doAfter(7.3, function()
+      hs.eventtap.keyStroke({ "ctrl" }, "tab")
+    end)
+    hs.timer.doAfter(7.4, function()
+      hs.eventtap.keyStroke(nil, "f")
+    end)
+    hs.timer.doAfter(7.5, function()
+      hs.eventtap.keyStroke(nil, "d")
+    end)
+    hs.timer.doAfter(7.6, function()
+      hs.eventtap.keyStroke(nil, "return")
+    end)
+    hs.timer.doAfter(7.7, function()
+      hs.eventtap.keyStroke({ "ctrl", "shift" }, "tab")
+    end)
+    hs.timer.doAfter(10, function()
+      hs.eventtap.keyStroke(nil, "return")
     end)
   end
 end
@@ -371,7 +398,9 @@ launchAll = function()
   launchSublime()
   launchITerm()
   launchChrome()
-  openMail()
+  if opened then
+    openMail()
+  end
 end
 
 -- Helpers
@@ -386,8 +415,10 @@ activateThenDo = function(appname, action)
   app = hs.application.get(appname)
 
   if app == nil then
+    opened = true
     openThenDo(appname, action)
   else
+    opened = false
     doToAllWindows(app, action)
   end
 end
