@@ -334,7 +334,7 @@ launchSublime = function()
     if homeMode then
       twoThirdsRightOnDell(win)
     else
-      maximizeOnMac(win)
+      fullscreenOnMac(win)
     end
   end)
 end
