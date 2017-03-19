@@ -358,6 +358,7 @@ end
 
 -- Hotkey bindings
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "r", hs.reload)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "h", function() hs.openConsole(true) end)
 
 -- Focused window hotkeys
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "m", function() maximize(hs.window.focusedWindow()) end)
