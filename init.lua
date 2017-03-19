@@ -225,6 +225,11 @@ fullscreenOnMac = function(win)
   fullscreen(win)
 end
 
+maximizeOnMac = function(win)
+  moveToMacScreen(win)
+  maximize(win)
+end
+
 twoThirdsRightOnDell = function(win)
   hs.eventtap.keyStroke({ "ctrl", "alt", "cmd" }, ".")
   hs.eventtap.keyStroke({ "ctrl", "alt", "cmd" }, "9") -- Chrome didn't like it the other way
@@ -265,37 +270,61 @@ end
 
 launchCgm = function()
   activateThenDo("Safari", function(win)
-    fullscreenOnMac(win)
+    if homeMode then
+      fullscreenOnMac(win)
+    else
+      maximizeOnMac(win)
+    end
   end)
 end
 
 launchChrome = function()
   activateThenDo("Google Chrome", function(win)
-    twoThirdsRightOnDell(win)
+    if homeMode then
+      twoThirdsRightOnDell(win)
+    else
+      maximizeOnMac(win)
+    end
   end)
 end
 
 launchFinder = function()
   activateThenDo("Finder", function(win)
-    rightOnDell(win)
+    if homeMode then
+      rightOnDell(win)
+    else
+      maximizeOnMac(win)
+    end
   end)
 end
 
 launchITerm = function()
   activateThenDo("iTerm2", function(win)
-    thirdLeftOnDell(win)
+    if homeMode then
+      thirdLeftOnDell(win)
+    else
+      fullscreenOnMac(win)
+    end
   end)
 end
 
 launchSpotify = function()
   activateThenDo("Spotify", function(win)
-    fullscreenOnMac(win)
+    if homeMode then
+      fullscreenOnMac(win)
+    else
+      maximizeOnMac(win)
+    end
   end)
 end
 
 launchSublime = function()
   activateThenDo("Sublime Text", function(win)
-    twoThirdsRightOnDell(win)
+    if homeMode then
+      twoThirdsRightOnDell(win)
+    else
+      maximizeOnMac(win)
+    end
   end)
 end
 
@@ -442,7 +471,7 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "c", launchChrome)
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "i", launchITerm)
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "s", launchSpotify)
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "u", launchSublime)
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "m", openMail)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "g", openMail)
 
 -- Inform when reloaded
 hs.alert.show("Hammerspoon config reloaded")
