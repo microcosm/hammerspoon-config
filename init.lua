@@ -285,29 +285,12 @@ launchSublime = function()
 end
 
 launchAll = function()
-  hs.timer.doAfter(0, function()
-    launchCgm()
-  end)
-
-  hs.timer.doAfter(2, function()
-    launchSpotify()
-  end)
-
-  hs.timer.doAfter(4, function()
-    launchFinder()
-  end)
-
-  hs.timer.doAfter(6, function()
-    launchSublime()
-  end)
-
-  hs.timer.doAfter(8, function()
-    launchITerm()
-  end)
-
-  hs.timer.doAfter(10, function()
-    launchChrome()
-  end)
+  launchCgm()
+  launchSpotify()
+  launchFinder()
+  launchSublime()
+  launchITerm()
+  launchChrome()
 end
 
 -- Helpers
