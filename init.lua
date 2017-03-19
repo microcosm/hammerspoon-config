@@ -16,7 +16,15 @@ maximize = function(win)
 end
 
 makeFullscreen = function(win)
-  win:setFullscreen(true)
+  if not win:isFullscreen() then
+    win:toggleFullscreen()
+  end
+end
+
+makeNotFullscreen = function(win)
+  if win:isFullscreen() then
+    win:toggleFullscreen()
+  end
 end
 
 toggleFullscreen = function(win)
@@ -231,55 +239,72 @@ end
 
 -- Screens
 fullscreenOnMac = function(win)
+  ensureNotFullscreen(win)
   moveToMacScreen(win)
   maximize(win)
   makeFullscreen(win)
 end
 
 maximizeOnMac = function(win)
+  ensureNotFullscreen(win)
   moveToMacScreen(win)
   maximize(win)
 end
 
-twoThirdsRightOnDell = function(win)
+twoThirdsRightOnDellViaKeystrokes = function(win)
+  ensureNotFullscreen(win)
   hs.eventtap.keyStroke({ "ctrl", "alt", "cmd" }, ".")
   hs.eventtap.keyStroke({ "ctrl", "alt", "cmd" }, "9") -- Chrome didn't like it the other way
 end
 
+twoThirdsRightOnDell = function(win)
+  ensureNotFullscreen(win)
+  moveToDellScreen(win)
+  twoThirdsRight(win)
+end
+
 rightOnDell = function(win)
+  ensureNotFullscreen(win)
   moveToDellScreen(win)
   right(win)
 end
 
 thirdLeftOnDell = function(win)
+  ensureNotFullscreen(win)
   moveToDellScreen(win)
   thirdLeft(win)
 end
 
 moveToSonyScreen = function(win)
+  ensureNotFullscreen(win)
   win:moveToScreen(sonyScreen)
 end
 
 moveToDellScreen = function(win)
+  ensureNotFullscreen(win)
   win:moveToScreen(dellScreen)
 end
 
 moveToMacScreen = function(win)
+  ensureNotFullscreen(win)
   win:moveToScreen(macScreen)
+end
+
+ensureNotFullscreen = function(win)
+  if win:isFullscreen() then
+    makeNotFullscreen(win)
+    --hs.timer.usleep(1500)
+  end
 end
 
 -- Apps
 setMode = function()
   awayMode = hs.screen.find(dellScreen) == nil
   homeMode = not awayMode
-  if homeMode then
-    hs.alert.show("Hammerspoon home mode")
-  else
-    hs.alert.show("Hammerspoon away mode")
-  end
 end
 
 launchCgm = function()
+  setMode()
   if homeMode then
     activateThenDo(cgm, function(win)
       fullscreenOnMac(win)
@@ -290,9 +315,10 @@ launchCgm = function()
 end
 
 launchChrome = function()
+  setMode()
   activateThenDo(chrome, function(win)
     if homeMode then
-      twoThirdsRightOnDell(win)
+      twoThirdsRightOnDellViaKeystrokes(win)
     else
       maximizeOnMac(win)
     end
@@ -300,6 +326,7 @@ launchChrome = function()
 end
 
 launchFinder = function()
+  setMode()
   activateThenDo(finder, function(win)
     if homeMode then
       rightOnDell(win)
@@ -310,6 +337,7 @@ launchFinder = function()
 end
 
 launchITerm = function()
+  setMode()
   activateThenDo(iTerm, function(win)
     if homeMode then
       thirdLeftOnDell(win)
@@ -320,6 +348,7 @@ launchITerm = function()
 end
 
 launchSpotify = function()
+  setMode()
   if homeMode then
     activateThenDo(spotify, function(win)
       fullscreenOnMac(win)
@@ -330,6 +359,7 @@ launchSpotify = function()
 end
 
 launchSublime = function()
+  setMode()
   activateThenDo(sublime, function(win)
     if homeMode then
       twoThirdsRightOnDell(win)
@@ -391,7 +421,6 @@ openMail = function()
 end
 
 launchAll = function()
-  setMode()
   launchCgm()
   launchSpotify()
   launchFinder()
