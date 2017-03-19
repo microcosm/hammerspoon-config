@@ -1,3 +1,8 @@
+-- Constants
+sonyScreen = "SONY TV"
+dellScreen = "DELL U3415W"
+macScreen = "Color LCD"
+
 -- General positioning
 maximize = function(win)
   win:maximize()
@@ -236,18 +241,28 @@ thirdLeftOnDell = function(win)
 end
 
 moveToSonyScreen = function(win)
-  win:moveToScreen("SONY TV")
+  win:moveToScreen(sonyScreen)
 end
 
 moveToDellScreen = function(win)
-  win:moveToScreen("DELL U3415W")
+  win:moveToScreen(dellScreen)
 end
 
 moveToMacScreen = function(win)
-  win:moveToScreen("Color LCD")
+  win:moveToScreen(macScreen)
 end
 
 -- Apps
+setMode = function()
+  awayMode = hs.screen.find(dellScreen) == nil
+  homeMode = not awayMode
+  if homeMode then
+    hs.alert.show("Hammerspoon home mode")
+  else
+    hs.alert.show("Hammerspoon away mode")
+  end
+end
+
 launchCgm = function()
   activateThenDo("Safari", function(win)
     fullscreenOnMac(win)
@@ -307,6 +322,7 @@ openMail = function()
 end
 
 launchAll = function()
+  setMode()
   launchCgm()
   launchSpotify()
   launchFinder()
