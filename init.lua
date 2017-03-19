@@ -284,6 +284,28 @@ launchSublime = function()
   end)
 end
 
+openMail = function()
+  hs.eventtap.keyStroke({ "cmd" }, "l")
+  hs.timer.doAfter(0.05, function()
+    hs.eventtap.keyStrokes("http://bit.ly/2mWJpOS")
+  end)
+  hs.timer.doAfter(0.1, function()
+    hs.eventtap.keyStroke(nil, "return")
+  end)
+  hs.timer.doAfter(0.15, function()
+    hs.eventtap.keyStroke({ "cmd" }, "t")
+  end)
+  hs.timer.doAfter(0.2, function()
+    hs.eventtap.keyStrokes("http://bit.ly/2mgiujH")
+  end)
+  hs.timer.doAfter(0.25, function()
+    hs.eventtap.keyStroke(nil, "return")
+  end)
+  hs.timer.doAfter(0.3, function()
+    hs.eventtap.keyStroke({ "ctrl", "shift" }, "tab")
+  end)
+end
+
 launchAll = function()
   launchCgm()
   launchSpotify()
@@ -291,6 +313,7 @@ launchAll = function()
   launchSublime()
   launchITerm()
   launchChrome()
+  openMail()
 end
 
 -- Helpers
@@ -403,6 +426,7 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "c", launchChrome)
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "i", launchITerm)
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "s", launchSpotify)
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "u", launchSublime)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "m", openMail)
 
 -- Inform when reloaded
 hs.alert.show("Hammerspoon config reloaded")
