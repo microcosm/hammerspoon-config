@@ -249,37 +249,37 @@ end
 
 -- Apps
 launchCgm = function()
-  launchThenDo("Safari", function(win)
+  activateThenDo("Safari", function(win)
     fullscreenOnMac(win)
   end)
 end
 
 launchChrome = function()
-  launchThenDo("Google Chrome", function(win)
+  activateThenDo("Google Chrome", function(win)
     twoThirdsRightOnDell(win)
   end)
 end
 
 launchFinder = function()
-  launchThenDo("Finder", function(win)
+  activateThenDo("Finder", function(win)
     rightOnDell(win)
   end)
 end
 
 launchITerm = function()
-  launchThenDo("iTerm", function(win)
+  activateThenDo("iTerm2", function(win)
     thirdLeftOnDell(win)
   end)
 end
 
 launchSpotify = function()
-  launchThenDo("Spotify", function(win)
+  activateThenDo("Spotify", function(win)
     fullscreenOnMac(win)
   end)
 end
 
 launchSublime = function()
-  launchThenDo("Sublime Text", function(win)
+  activateThenDo("Sublime Text", function(win)
     twoThirdsRightOnDell(win)
   end)
 end
@@ -318,21 +318,41 @@ workFrom = function(win)
   screenFrame = screen:frame()
 end
 
-launchThenDo = function(appname, action)
-  app = hs.application.open(appname, 30, true)
-  doWhenOpen(app, action)
+activateThenDo = function(appname, action)
+  app = hs.application.get(appname)
+
+  if app == nil then
+    openThenDo(appname, action)
+  else
+    doToAllWindows(app, action)
+  end
 end
 
-doWhenOpen = function(app, action)
+openThenDo = function(appname, action)
+  hs.application.open(pathname(appname))
   hs.timer.waitUntil(
     function()
-      return app:allWindows()[1] ~= nil
+      app = hs.application.get(appname)
+      return app ~= nil and app:allWindows()[1] ~= nil
     end,
     function()
-      action(app:allWindows()[1])
+      doToAllWindows(app, action)
     end,
-    0.1
+    0.05
   )
+end
+
+doToAllWindows = function(app, action)
+  for i, win in ipairs(app:allWindows()) do
+    action(win)
+  end
+end
+
+pathname = function(appname)
+  if appname == "iTerm2" then
+    return "iTerm"
+  end
+  return appname;
 end
 
 -- Hotkey bindings
@@ -378,7 +398,6 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "a", launchAll)
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "b", launchCgm)
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "c", launchChrome)
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "i", launchITerm)
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "f", launchFinder)
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "s", launchSpotify)
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "u", launchSublime)
 
