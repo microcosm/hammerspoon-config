@@ -3,6 +3,13 @@ sonyScreen = "SONY TV"
 dellScreen = "DELL U3415W"
 macScreen = "Color LCD"
 
+cgm = "Safari"
+chrome = "Google Chrome"
+finder = "Finder"
+iTerm = "iTerm2"
+spotify = "Spotify"
+sublime = "Sublime Text"
+
 -- General positioning
 maximize = function(win)
   win:maximize()
@@ -269,17 +276,17 @@ setMode = function()
 end
 
 launchCgm = function()
-  activateThenDo("Safari", function(win)
-    if homeMode then
+  if homeMode then
+    activateThenDo(cgm, function(win)
       fullscreenOnMac(win)
-    else
-      maximizeOnMac(win)
-    end
-  end)
+    end)
+  else
+    closeIfOpen(cgm)
+  end
 end
 
 launchChrome = function()
-  activateThenDo("Google Chrome", function(win)
+  activateThenDo(chrome, function(win)
     if homeMode then
       twoThirdsRightOnDell(win)
     else
@@ -289,7 +296,7 @@ launchChrome = function()
 end
 
 launchFinder = function()
-  activateThenDo("Finder", function(win)
+  activateThenDo(finder, function(win)
     if homeMode then
       rightOnDell(win)
     else
@@ -299,7 +306,7 @@ launchFinder = function()
 end
 
 launchITerm = function()
-  activateThenDo("iTerm2", function(win)
+  activateThenDo(iTerm, function(win)
     if homeMode then
       thirdLeftOnDell(win)
     else
@@ -309,17 +316,17 @@ launchITerm = function()
 end
 
 launchSpotify = function()
-  activateThenDo("Spotify", function(win)
-    if homeMode then
+  if homeMode then
+    activateThenDo(spotify, function(win)
       fullscreenOnMac(win)
-    else
-      maximizeOnMac(win)
-    end
-  end)
+    end)
+  else
+    closeIfOpen(spotify)
+  end
 end
 
 launchSublime = function()
-  activateThenDo("Sublime Text", function(win)
+  activateThenDo(sublime, function(win)
     if homeMode then
       twoThirdsRightOnDell(win)
     else
@@ -414,6 +421,13 @@ end
 doToAllWindows = function(app, action)
   for i, win in ipairs(app:allWindows()) do
     action(win)
+  end
+end
+
+closeIfOpen = function(appname)
+  app = hs.application.get(appname)
+  if app ~= nil then
+    app:kill()
   end
 end
 
