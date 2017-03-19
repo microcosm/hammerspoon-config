@@ -15,7 +15,11 @@ maximize = function(win)
   win:maximize()
 end
 
-fullscreen = function(win)
+makeFullscreen = function(win)
+  win:setFullscreen(true)
+end
+
+toggleFullscreen = function(win)
   win:toggleFullscreen()
 end
 
@@ -229,7 +233,7 @@ end
 fullscreenOnMac = function(win)
   moveToMacScreen(win)
   maximize(win)
-  fullscreen(win)
+  makeFullscreen(win)
 end
 
 maximizeOnMac = function(win)
@@ -444,7 +448,7 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "h", function() hs.openConsole(true) end)
 
 -- Focused window hotkeys
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "m", function() maximize(hs.window.focusedWindow()) end)
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "f", function() fullscreen(hs.window.focusedWindow()) end)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "f", function() toggleFullscreen(hs.window.focusedWindow()) end)
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "n", function() nextScreen(hs.window.focusedWindow()) end)
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "p", function() previousScreen(hs.window.focusedWindow()) end)
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "t", function() print(hs.application.frontmostApplication()) end)
