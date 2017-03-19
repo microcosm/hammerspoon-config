@@ -363,6 +363,7 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "m", function() maximize(hs.window.focuse
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "f", function() fullscreen(hs.window.focusedWindow()) end)
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "n", function() nextScreen(hs.window.focusedWindow()) end)
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "p", function() previousScreen(hs.window.focusedWindow()) end)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "t", function() print(hs.application.frontmostApplication()) end)
 
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Left", function() left(hs.window.focusedWindow()) end)
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Right", function() right(hs.window.focusedWindow()) end)
