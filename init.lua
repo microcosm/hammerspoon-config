@@ -333,7 +333,25 @@ openThenDo = function(appname, action)
   hs.timer.waitUntil(
     function()
       app = hs.application.get(appname)
-      return app ~= nil and app:allWindows()[1] ~= nil
+      return app ~= nil
+    end,
+    function()
+      if app:allWindows()[1] == nil then
+        windowThenDo(appname, action)
+      else
+        doToAllWindows(app, action)
+      end
+    end,
+    0.05
+  )
+end
+
+windowThenDo = function(appname, action)
+  hs.application.launchOrFocus(appname)
+  hs.timer.waitUntil(
+    function()
+      app = hs.application.get(appname)
+      return app:allWindows()[1] ~= nil
     end,
     function()
       doToAllWindows(app, action)
