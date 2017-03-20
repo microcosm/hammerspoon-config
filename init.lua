@@ -422,6 +422,7 @@ launchAll = function()
   if opened then
     openMail()
   end
+  hs.alert.show("Ready for use")
 end
 
 resetAll = function()
