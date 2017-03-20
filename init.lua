@@ -239,62 +239,46 @@ end
 
 -- Screens
 fullscreenOnMac = function(win)
-  ensureNotFullscreen(win)
   moveToMacScreen(win)
   maximize(win)
   makeFullscreen(win)
 end
 
 maximizeOnMac = function(win)
-  ensureNotFullscreen(win)
   moveToMacScreen(win)
   maximize(win)
 end
 
 twoThirdsRightOnDellViaKeystrokes = function(win)
-  ensureNotFullscreen(win)
   hs.eventtap.keyStroke({ "ctrl", "alt", "cmd" }, ".")
   hs.eventtap.keyStroke({ "ctrl", "alt", "cmd" }, "9") -- Chrome didn't like it the other way
 end
 
 twoThirdsRightOnDell = function(win)
-  ensureNotFullscreen(win)
   moveToDellScreen(win)
   twoThirdsRight(win)
 end
 
 rightOnDell = function(win)
-  ensureNotFullscreen(win)
   moveToDellScreen(win)
   right(win)
 end
 
 thirdLeftOnDell = function(win)
-  ensureNotFullscreen(win)
   moveToDellScreen(win)
   thirdLeft(win)
 end
 
 moveToSonyScreen = function(win)
-  ensureNotFullscreen(win)
   win:moveToScreen(sonyScreen)
 end
 
 moveToDellScreen = function(win)
-  ensureNotFullscreen(win)
   win:moveToScreen(dellScreen)
 end
 
 moveToMacScreen = function(win)
-  ensureNotFullscreen(win)
   win:moveToScreen(macScreen)
-end
-
-ensureNotFullscreen = function(win)
-  if win:isFullscreen() then
-    makeNotFullscreen(win)
-    --hs.timer.usleep(1500)
-  end
 end
 
 -- Apps
@@ -432,12 +416,39 @@ launchAll = function()
   end
 end
 
+resetAll = function()
+  reset(cgm)
+  reset(spotify)
+  reset(finder)
+  reset(sublime)
+  reset(iTerm)
+  reset(chrome)
+end
+
 -- Helpers
 workFrom = function(win)
   hs.window.animationDuration = 0
   winFrame = win:frame()
   screen = win:screen()
   screenFrame = screen:frame()
+end
+
+reset = function(appname)
+  app = hs.application.get(appname)
+  animationDuration = 1000000
+
+  if app ~= nil then
+    hs.application.launchOrFocus(pathname(appname))
+    hs.timer.usleep(animationDuration)
+
+    doToAllWindows(app, function(win)
+      if win:isFullscreen() then
+        win:focus()
+        makeNotFullscreen(win)
+        hs.timer.usleep(animationDuration)
+      end
+    end)
+  end
 end
 
 activateThenDo = function(appname, action)
@@ -546,6 +557,7 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "/", function() moveToMacScreen(hs.window
 
 -- App specific hotkeys
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "a", launchAll)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "space", resetAll)
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "b", launchCgm)
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "c", launchChrome)
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "i", launchITerm)
