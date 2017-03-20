@@ -10,6 +10,10 @@ iTerm = "iTerm2"
 spotify = "Spotify"
 sublime = "Sublime Text"
 
+hs.window.animationDuration = 0
+fullscreenAnimationDuration = 1000000
+courtesyDuration = 125000
+
 -- General positioning
 maximize = function(win)
   win:maximize()
@@ -240,8 +244,11 @@ end
 -- Screens
 fullscreenOnMac = function(win)
   moveToMacScreen(win)
+  hs.timer.usleep(courtesyDuration)
   maximize(win)
+  hs.timer.usleep(courtesyDuration)
   makeFullscreen(win)
+  hs.timer.usleep(fullscreenAnimationDuration)
 end
 
 maximizeOnMac = function(win)
@@ -291,6 +298,8 @@ launchCgm = function()
   setMode()
   if homeMode then
     activateThenDo(cgm, function(win)
+      print("HERE ON CGM")
+      print(win)
       fullscreenOnMac(win)
     end)
   else
@@ -302,7 +311,7 @@ launchChrome = function()
   setMode()
   activateThenDo(chrome, function(win)
     if homeMode then
-      twoThirdsRightOnDellViaKeystrokes(win)
+      twoThirdsRightOnDell(win)
     else
       maximizeOnMac(win)
     end
@@ -405,6 +414,7 @@ openMail = function()
 end
 
 launchAll = function()
+  resetAll()
   launchCgm()
   launchSpotify()
   launchFinder()
@@ -427,7 +437,6 @@ end
 
 -- Helpers
 workFrom = function(win)
-  hs.window.animationDuration = 0
   winFrame = win:frame()
   screen = win:screen()
   screenFrame = screen:frame()
@@ -435,17 +444,16 @@ end
 
 reset = function(appname)
   app = hs.application.get(appname)
-  animationDuration = 1000000
 
   if app ~= nil then
     hs.application.launchOrFocus(pathname(appname))
-    hs.timer.usleep(animationDuration)
+    hs.timer.usleep(fullscreenAnimationDuration)
 
     doToAllWindows(app, function(win)
       if win:isFullscreen() then
         win:focus()
         makeNotFullscreen(win)
-        hs.timer.usleep(animationDuration)
+        hs.timer.usleep(fullscreenAnimationDuration)
       end
     end)
   end
