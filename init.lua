@@ -298,8 +298,6 @@ launchCgm = function()
   setMode()
   if homeMode then
     activateThenDo(cgm, function(win)
-      print("HERE ON CGM")
-      print(win)
       fullscreenOnMac(win)
     end)
   else
@@ -446,8 +444,7 @@ reset = function(appname)
   app = hs.application.get(appname)
 
   if app ~= nil then
-    hs.application.launchOrFocus(pathname(appname))
-    hs.timer.usleep(fullscreenAnimationDuration)
+    activate(appname)
 
     doToAllWindows(app, function(win)
       if win:isFullscreen() then
@@ -459,6 +456,13 @@ reset = function(appname)
   end
 end
 
+activate = function(appname)
+  -- OSX apps in fullscreen just love to animate
+  -- If you are using fullscreen, you have to wait
+  hs.application.launchOrFocus(pathname(appname))
+  hs.timer.usleep(fullscreenAnimationDuration)
+end
+
 activateThenDo = function(appname, action)
   app = hs.application.get(appname)
 
@@ -467,6 +471,7 @@ activateThenDo = function(appname, action)
     openThenDo(appname, action)
   else
     opened = false
+    activate(appname)
     doToAllWindows(app, action)
   end
 end
@@ -490,7 +495,7 @@ openThenDo = function(appname, action)
 end
 
 windowThenDo = function(appname, action)
-  hs.application.launchOrFocus(appname)
+  hs.application.launchOrFocus(pathname(appname))
   hs.timer.waitUntil(
     function()
       app = hs.application.get(appname)
