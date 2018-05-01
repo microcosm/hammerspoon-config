@@ -342,7 +342,7 @@ launchSpotify = function()
   setMode()
   if homeMode then
     activateThenDo(spotify, function(win)
-      fullscreenOnMac(win)
+      maximizeOnMac(win)
     end)
   else
     closeIfOpen(spotify)
@@ -355,7 +355,7 @@ launchSublime = function()
     if homeMode then
       twoThirdsRightOnDell(win)
     else
-      fullscreenOnMac(win)
+      maximizeOnMac(win)
     end
   end)
 end
@@ -413,7 +413,7 @@ end
 
 launchAll = function()
   resetAll()
-  launchCgm()
+  --launchCgm()
   launchSpotify()
   launchFinder()
   launchSublime()
