@@ -333,7 +333,7 @@ launchITerm = function()
     if homeMode then
       thirdLeftOnDell(win)
     else
-      fullscreenOnMac(win)
+      thirdLeftOnMac(win)
     end
   end)
 end
